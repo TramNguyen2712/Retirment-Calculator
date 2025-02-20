@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewpoint" content="width=device-width,inital-scale=1.0">
+        <title>Retirement Dashboard</title>
+        <link rel="stylesheet" href="/static/style.css">
+    </head>
+    <body>
+        <header>
+            <h1>Retirement Calulator</h1>
+        </header>
+        <main>
+            <div class="input-form">
+                <form action="/calculate" method="post">
+                    <label>Scenario's Name</label>
+                    <input type="text" id="name" name="name" required>
+
+                    <label>Current Nest Egg ($)</label>
+                    <input type="number" id="nestEgg" name="nestEgg" value="{{ nestEgg if nestEgg else '' }}" required>
+
+                    <label>Rate of Return (%)</label>
+                    <input type="number" id="rate" name="rate" value="{{ rate if rate else '' }}" required>
+
+                    <label>Yearly Salary ($)</label>
+                    <input type="number" id="salary" name="salary" value="{{ salary if salary else '' }}" required>
+
+                    <label>Yearly Amount Contributed (%)</label>
+                    <input type="number" id="contributed" name="contributed" value="{{ contributed if contributed else '' }}" required>
+
+                    <label>Estimated Yearly Salary Increase ($)</label>
+                    <input type="number" id="salaryIncrease" name="salaryIncrease" value="{{ salaryIncrease if salaryIncrease else '' }}" required>
+
+                    <label>How old are you?</label>
+                    <input type="number" id="currentAge" name="currentAge" value="{{ currentAge if currentAge else '' }}" required>
+
+                    <label>How old do you want to retire?</label>
+                    <input type="number" id="retirementAge" name="retirementAge" value="{{ retirementAge if retirementAge else '' }}" required>
+
+                    <label>Desired income at retirement for active years (from 65-80) ($)</label>
+                    <input type="number" id="incomeActiveYears" name="incomeActiveYears" value="{{ incomeActiveYears if incomeActiveYears else '' }}" required>
+
+                    <label>Desired income at retirement after active years (from 80) ($)</label>
+                    <input type="number" id="incomeInactiveYears" name="incomeInactiveYears" value="{{ incomeInactiveYears if incomeInactiveYears else '' }}" required>
+
+                    <button id="calculateButton" type="submit" name="action" value="calculate">Calculate</button>
+                    
+                </form>
+            </div>
+            <div class="text">
+                <div class="saving" >
+                    <h3>Your Total Saving at Retirement</h3>
+                    <p id="totalSavings">{{totalSaved}}</p>
+                </div>
+                
+                <div class="summary">
+                    <h3>Retirement Summary</h3>
+                    <p id="retirementSummary">{{retirementSummary}}</p>
+                </div>
+                
+                <div class="chart">
+
+                </div>
+
+                <div class="report">
+                    <table>
+                        
+                    </table>
+                </div>
+                
+            </div>
+        </main>
+    </body>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</html>

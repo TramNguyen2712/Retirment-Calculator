@@ -1,0 +1,90 @@
+body {
+    background-color: #f9f3e5;
+    font-family: Arial, Helvetica, sans-serif;
+    letter-spacing: .05em;
+    margin: 1.5em;
+}
+
+header h1{
+    padding-left: .5em;
+    color: #a86446;
+    font-size: 40px;
+}
+
+main {
+    display: flex;
+    width: 100%;
+}
+
+.input-form{
+    width: 23%;
+    float: left;
+    margin: 0 1em;
+    background-color: #5c8271;
+    color: #f9f3e5;
+    padding: 1.5em;
+    border-radius: 5px;
+}
+
+input{
+    width: 90%;
+    padding: 1em 0;
+    margin: 1em 0;
+    background-color: #f9f3e5;
+    border: solid 1px black;
+    padding-left: 1.5em;
+    font-size: 15px;
+}
+
+label {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+button {
+    background-color: #f9f3e5;
+    color: #5c8271;
+    font-weight: bold;
+    width: 50%;
+    padding: 1em;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 5px;
+    margin: 1em 5em;
+    font-size: 15px;
+}
+
+.text{
+    width: 70%;
+    float: right;
+    text-align: center;
+}
+
+.saving h3 {
+    color: #5c8271;
+    font-weight: bold;
+    font-size: 25px;
+    text-transform: uppercase;
+}
+
+p {
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.saving {
+    border-bottom: solid 1px #a86446;
+    margin: 0 6em;
+}
+
+.summary h3 {
+    color: #a86446;
+    font-weight: bold;
+    font-size: 20px;
+    text-transform: uppercase;
+}
+
+
+
+
