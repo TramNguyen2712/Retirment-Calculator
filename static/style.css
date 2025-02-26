@@ -85,6 +85,67 @@ p {
     text-transform: uppercase;
 }
 
+.report {
+    width: 95%;
+    margin: auto;
+}
 
+table.scrolldown {
+    width: 100%;
+
+    /* border-collapse: collapse; */
+    border-spacing: 0;
+    border: 2px solid black;
+}
+
+/* To display the block as level element */
+table.scrolldown tbody,
+table.scrolldown thead {
+    display: block;
+}
+
+thead tr th {
+    height: 40px;
+    line-height: 40px;
+}
+
+table.scrolldown tbody {
+
+    /* Set the height of table body */
+    height: 500px;
+
+    /* Set vertical scroll */
+    overflow-y: auto;
+
+    /* Hide the horizontal scroll */
+    overflow-x: hidden;
+
+    font-size: 17px;
+}
+
+tbody {
+    border-top: 2px solid black;
+    line-height: 30px;
+}
+
+tbody td,
+thead th {
+    width: 250px;
+    
+}
+
+td, th {
+    text-align: center;
+}
+
+
+th {
+    background-color: #83b8a1;
+    text-transform: uppercase;
+    color: black;
+}
+tbody tr:nth-child(even){
+    background-color: #d8d8d8;
+}
 
 

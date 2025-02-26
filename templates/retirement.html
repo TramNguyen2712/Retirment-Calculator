@@ -41,7 +41,7 @@
                     <input type="number" id="incomeActiveYears" name="incomeActiveYears" value="{{ incomeActiveYears if incomeActiveYears else '' }}" required>
 
                     <label>Desired income at retirement after active years (from 80) ($)</label>
-                    <input type="number" id="incomeInactiveYears" name="incomeInactiveYears" value="{{ incomeInactiveYears if incomeInactiveYears else '' }}" required>
+                    <input type="number" id="incomeInactiveYears" name="incomeInactiveYears" value="{{ incomeInActiveYears if incomeInActiveYears else '' }}" required>
 
                     <button id="calculateButton" type="submit" name="action" value="calculate">Calculate</button>
                     
@@ -55,16 +55,36 @@
                 
                 <div class="summary">
                     <h3>Retirement Summary</h3>
-                    <p id="retirementSummary">{{retirementSummary}}</p>
+                    <!-- <p id="retirementSummary">{{retirementSummary}}</p> -->
                 </div>
                 
-                <div class="chart">
+                <!-- <div class="chart">
 
-                </div>
+                </div> -->
 
                 <div class="report">
-                    <table>
-                        
+                    <table class="scrolldown">
+                        <thead>
+                            <tr>
+                                <th>Age</th>
+                                <th>Begining Balance</th>
+                                <th>Contribution</th>
+                                <th>Withdrawn</th>
+                                <th>Ending Balance</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for row in yearly_summary %}
+                            <tr>
+                                <td>{{ row["Age"] }}</td>
+                                <td>${{ row["Beginning Balance"] }}</td>
+                                <td>${{ row["Contribution"] }}</td>
+                                <td>${{ row["Withdrawn"] }}</td>
+                                <td>${{ row["Ending Balance"] }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+
                     </table>
                 </div>
                 
