@@ -5,6 +5,9 @@
         <meta name="viewpoint" content="width=device-width,inital-scale=1.0">
         <title>Retirement Dashboard</title>
         <link rel="stylesheet" href="/static/style.css">
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="http://cdn.jsdevilr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     </head>
     <body>
         <header>
@@ -17,31 +20,31 @@
                     <input type="text" id="name" name="name" required>
 
                     <label>Current Nest Egg ($)</label>
-                    <input type="number" id="nestEgg" name="nestEgg" value="{{ nestEgg if nestEgg else '' }}" required>
+                    <input type="number" id="nestEgg" name="nestEgg" required>
 
                     <label>Rate of Return (%)</label>
-                    <input type="number" id="rate" name="rate" value="{{ rate if rate else '' }}" required>
+                    <input type="number" id="rate" name="rate" required>
 
                     <label>Yearly Salary ($)</label>
-                    <input type="number" id="salary" name="salary" value="{{ salary if salary else '' }}" required>
+                    <input type="number" id="salary" name="salary"  required>
 
                     <label>Yearly Amount Contributed (%)</label>
-                    <input type="number" id="contributed" name="contributed" value="{{ contributed if contributed else '' }}" required>
+                    <input type="number" id="contributed" name="contributed"  required>
 
                     <label>Estimated Yearly Salary Increase ($)</label>
-                    <input type="number" id="salaryIncrease" name="salaryIncrease" value="{{ salaryIncrease if salaryIncrease else '' }}" required>
+                    <input type="number" id="salaryIncrease" name="salaryIncrease"  required>
 
                     <label>How old are you?</label>
-                    <input type="number" id="currentAge" name="currentAge" value="{{ currentAge if currentAge else '' }}" required>
+                    <input type="number" id="currentAge" name="currentAge" required>
 
                     <label>How old do you want to retire?</label>
-                    <input type="number" id="retirementAge" name="retirementAge" value="{{ retirementAge if retirementAge else '' }}" required>
+                    <input type="number" id="retirementAge" name="retirementAge"  required>
 
                     <label>Desired income at retirement for active years (from 65-80) ($)</label>
-                    <input type="number" id="incomeActiveYears" name="incomeActiveYears" value="{{ incomeActiveYears if incomeActiveYears else '' }}" required>
+                    <input type="number" id="incomeActiveYears" name="incomeActiveYears"  required>
 
                     <label>Desired income at retirement after active years (from 80) ($)</label>
-                    <input type="number" id="incomeInactiveYears" name="incomeInactiveYears" value="{{ incomeInActiveYears if incomeInActiveYears else '' }}" required>
+                    <input type="number" id="incomeInactiveYears" name="incomeInactiveYears"  required>
 
                     <button id="calculateButton" type="submit" name="action" value="calculate">Calculate</button>
                     
@@ -50,7 +53,7 @@
             <div class="text">
                 <div class="saving" >
                     <h3>Your Total Saving at Retirement</h3>
-                    <p id="totalSavings">{{totalSaved}}</p>
+                    <span id="total_savings">0</span>
                 </div>
                 
                 <div class="summary">
@@ -58,9 +61,13 @@
                     <!-- <p id="retirementSummary">{{retirementSummary}}</p> -->
                 </div>
                 
-                <!-- <div class="chart">
+                <div class="chart">
+                    <h3>Yearly Income</h3>
+                    <canvas id="incomeChart"></canvas>
 
-                </div> -->
+                    <h3>Retirement Saving Growth</h3>
+                    <canvas id="savingGrowthChart" width="900" height="400"></canvas>
+                </div> 
 
                 <div class="report">
                     <table class="scrolldown">
@@ -80,7 +87,7 @@
                                 <td>${{ row["Beginning Balance"] }}</td>
                                 <td>${{ row["Contribution"] }}</td>
                                 <td>${{ row["Withdrawn"] }}</td>
-                                <td>${{ row["Ending Balance"] }}</td>
+                                <td>${{ row["endingBalance"] }}</td>
                             </tr>
                             {% endfor %}
                         </tbody>
@@ -91,5 +98,42 @@
             </div>
         </main>
     </body>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        
+        let current_age = document.getElementById("currentAge").value;
+        let retirement_age = document.getElementById("retirementAge").value;
+        let nest_egg = document.getElementById("nestEgg").value;
+        let annual_contribution = document.getElementById("contributed").value;
+        let rate_of_return = document.getElementById("rate").value;
+
+        document.getElementById("currentAge").value = current_age;
+        document.getElementById("retirementAge").value = retirement_age;
+        document.getElementById("nestEgg").value = nest_egg;
+        document.getElementById("contributed").value = annual_contribution;
+        document.getElementById("rate").value = rate_of_return;
+
+        const age_retirement = {{ age_retirement | safe}};
+ 
+        const data = {
+            labels: age_retirement,
+            datasets: [{
+                label: 'Sales',
+                backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: {{ income_retirement | safe }},
+            }]
+        };
+
+        const config = {
+            type: 'line',
+            data: data,
+            options: { responsive: false }
+        };
+
+        const myChart = new Chart(
+            document.getElementById('savingGrowthChart'),
+            config
+        );
+
+    </script>
 </html>
